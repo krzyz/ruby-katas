@@ -1,0 +1,7 @@
+class Calculator
+  attr_accessor :expr
+
+  def initialize(expression) # expression is a string
+    @expr = expression if /\A\d+,\d+\z/ == expression
+  end
+end
