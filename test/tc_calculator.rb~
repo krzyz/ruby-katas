@@ -27,7 +27,7 @@ class CalculatorTest < Test::Unit::TestCase
   end
 
   def test_initialize_not_ok
-    ["1,4", "432,4", "43,-1"].each do |expr|
+    ["-1,4", "432,4", "43,-1"].each do |expr|
       assert_raise ArgumentError do
         Calculator.new(expr)
       end
@@ -43,5 +43,14 @@ class CalculatorTest < Test::Unit::TestCase
     end
 
     expr_test new_expr
+  end
+
+  def test_add_method
+   calc = Calculator.new('')
+   assert_equal 0, calc.add
+   calc.expr = '1'
+   assert_equal 1, calc.add
+   calc.expr = '1,2'
+   assert_equal 2, calc.add
   end
 end

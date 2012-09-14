@@ -6,10 +6,14 @@ class Calculator
   end
 
   def expr=(expression)
-    if /\A\d,\d\z/ === expression
+    if /\A\d?(,\d)?\z/ === expression
       @expr = expression 
     else
       raise ArgumentError, 'Expression must be a "digit/digit" string'
     end
+  end
+
+  def add
+    @expr.split(',').map {|x| x.to_i}.inject(0, :+)
   end
 end

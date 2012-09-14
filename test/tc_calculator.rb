@@ -44,4 +44,13 @@ class CalculatorTest < Test::Unit::TestCase
 
     expr_test new_expr
   end
+
+  def test_add_method
+   calc = Calculator.new('')
+   assert_equal 0, calc.add
+   calc.expr = '1'
+   assert_equal 1, calc.add
+   calc.expr = '1,2'
+   assert_equal 3, calc.add
+  end
 end
