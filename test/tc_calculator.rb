@@ -53,4 +53,11 @@ class CalculatorTest < Test::Unit::TestCase
    calc.expr = '1,2'
    assert_equal 3, calc.add
   end
+
+  def test_unknown_amount
+    calc = Calculator.new('1,2,3')
+    assert_equal 6, calc.add
+    calc.expr = '1,2,5,8'
+    assert_equal 16, calc.add
+  end
 end
