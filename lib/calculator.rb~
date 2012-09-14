@@ -17,8 +17,18 @@ class Calculator
     @digits.inject(0, :+)
   end
 
-  def diff
-    raise ArgumentError, 'To use diff expression must have at least 2 digits' if @digits.length < 2
+  def diff 
+    if @digits.length < 2
+      raise ArgumentError, 'To use diff expression must have at least 2 digits'
     @digits.inject(:-)
   end
+
+  def prod
+    @digits.inject(:*)
+  end
+
+  def div
+    if @digits.include? 0
+      raise ArgumentError, '0 encountered in expression'
+    @digits.inject(:/)
 end

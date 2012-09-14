@@ -45,31 +45,28 @@ class CalculatorTest < Test::Unit::TestCase
     expr_test new_expr
   end
 
+  def method_test examples, method
+    examples.each do |expr, result|
+      calc = Calculator.new(expr)
+      assert_equal result, eval("calc.#{method}")
+    end
+  end
+
   def test_add_method
-   calc = Calculator.new('')
-   assert_equal 0, calc.add
-   calc.expr = '1'
-   assert_equal 1, calc.add
-   calc.expr = '1,2'
-   assert_equal 3, calc.add
+    examples = { '' => 0, '1' => 1, '1,2' => 3}
+    method_test(examples, 'add')
   end
 
   def test_unknown_amount
     examples = { '1,2,3' => 6, '1,2,5,8' => 16 }
-    examples.each do |expr, result|
-      calc = Calculator.new(expr)
-      assert_equal result, calc.add
-    end
+    method_test(examples, 'add')
   end
 
   def test_diff_method
     examples = { '1,0'       => 1,
                  '3,2,1'     => 0,
                  '5,4,3,2,1' => -5 }
-    examples.each do |expr, result|
-      calc = Calculator.new(expr)
-      assert_equal result, calc.diff
-    end
+    method_test(examples, 'diff')
 
     not_good = ['', '5']
     not_good.each do |x|
@@ -84,9 +81,21 @@ class CalculatorTest < Test::Unit::TestCase
     examples = { '0'     => 0,
                  '2,1'   => 2,
                  '3,2,1' => 6 }
-    examples.each do |expr, result|
-      calc = Calculator.new(expr)
-      assert_equal result, calc.prod
+    method_test(examples, 'prod')
+  end
+
+  def test_div_method
+    examples = { '2,1'   => 2,
+                 '3,2,1' => 1,
+                 '1,2,3' => 0 }
+    method_test(examples, 'div')
+
+    not_good = ['2,4,0', '0,3,2']
+    not_good.each do |x|
+      calc = Calculator.new(x)
+      assert_raise ArgumentError do
+        calc.div
+      end
     end
   end
 end
