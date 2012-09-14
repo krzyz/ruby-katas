@@ -79,4 +79,14 @@ class CalculatorTest < Test::Unit::TestCase
       end
     end
   end
+
+  def test_prod_method
+    examples = { '0'     => 0,
+                 '2,1'   => 2,
+                 '3,2,1' => 6 }
+    examples.each do |expr, result|
+      calc = Calculator.new(expr)
+      assert_equal result, calc.prod
+    end
+  end
 end

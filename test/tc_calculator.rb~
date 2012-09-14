@@ -71,7 +71,7 @@ class CalculatorTest < Test::Unit::TestCase
       assert_equal result, calc.diff
     end
 
-    not_good = ['', '5', '3,4']
+    not_good = ['', '5']
     not_good.each do |x|
       calc = Calculator.new(x)
       assert_raise ArgumentError do

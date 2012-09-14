@@ -21,4 +21,8 @@ class Calculator
     raise ArgumentError, 'To use diff expression must have at least 2 digits' if @digits.length < 2
     @digits.inject(:-)
   end
+
+  def prod
+    @digits.inject(:*)
+  end
 end
