@@ -20,6 +20,7 @@ class Calculator
   def diff 
     if @digits.length < 2
       raise ArgumentError, 'To use diff expression must have at least 2 digits'
+    end
     @digits.inject(:-)
   end
 
@@ -30,5 +31,7 @@ class Calculator
   def div
     if @digits.include? 0
       raise ArgumentError, '0 encountered in expression'
+    end
     @digits.inject(:/)
+  end
 end

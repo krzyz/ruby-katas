@@ -89,5 +89,13 @@ class CalculatorTest < Test::Unit::TestCase
                  '3,2,1' => 1,
                  '1,2,3' => 0 }
     method_test(examples, 'div')
+
+    not_good = ['2,4,0', '0,3,2']
+    not_good.each do |x|
+      calc = Calculator.new(x)
+      assert_raise ArgumentError do
+        calc.div
+      end
+    end
   end
 end
