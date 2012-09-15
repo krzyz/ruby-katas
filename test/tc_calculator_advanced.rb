@@ -28,7 +28,12 @@ class CalculatorAdvancedTest < Test::Unit::TestCase
   end
 
   def test_delimiter_diff
-    examples = { "\\[;]\n2;1" => 1 }
+    examples = { "//[;]\n2;1" => 1 }
     method_test(examples, 'diff')
+  end
+
+  def test_delimiter_prod
+    examples = { "//[;]\n2;1" => 2 }
+    method_test(examples, 'prod')
   end
 end
