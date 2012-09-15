@@ -9,12 +9,13 @@ end
 
 def method_test examples, method
   examples.each do |expr, result|
-    calc = Calculator.new(expr)
     if result.instance_of?(Fixnum)
+      calc = Calculator.new(expr)
       assert_equal result, eval("calc.#{method}")
     elsif result == ArgumentError
       assert_raise ArgumentError do
-       eval("calc.#{method}")
+        calc = Calculator.new(expr)
+        eval("calc.#{method}")
       end
     end 
   end

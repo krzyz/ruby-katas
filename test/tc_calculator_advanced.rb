@@ -12,4 +12,12 @@ class CalculatorAdvancedTest < Test::Unit::TestCase
                  "1\n,2" => ArgumentError }
     method_test(examples, 'add')
   end
+
+  # Exception when passed negative numbers
+
+  def test_negatives
+    assert_raise ArgumentError do
+      calc = Calculator.new("-1,4\n-5")
+    end
+  end
 end
