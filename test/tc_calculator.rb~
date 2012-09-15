@@ -1,4 +1,5 @@
 require 'lib/calculator'
+require 'test/calculator_helper'
 require 'test/unit'
 
 # Maybe writing tests longer than simple classes
@@ -7,15 +8,7 @@ require 'test/unit'
 
 
 class CalculatorTest < Test::Unit::TestCase
-  def expr_test(code)
-    0.upto(9) do |i|
-      0.upto(9) do |j|
-        expression = i.to_s + ',' + j.to_s
-        code.call expression
-      end
-    end
-  end
-
+  
   def test_initialize_ok
     new_calc = Proc.new do |expression|
       assert_nothing_raised do 
@@ -45,36 +38,26 @@ class CalculatorTest < Test::Unit::TestCase
     expr_test new_expr
   end
 
-  def method_test examples, method
-    examples.each do |expr, result|
-      calc = Calculator.new(expr)
-      assert_equal result, eval("calc.#{method}")
-    end
-  end
-
   def test_add_method
-    examples = { '' => 0, '1' => 1, '1,2' => 3}
+    examples = { '' => 0,
+                 '1' => 1,
+                 '1,2' => 3 }
     method_test(examples, 'add')
   end
 
   def test_unknown_amount
-    examples = { '1,2,3' => 6, '1,2,5,8' => 16 }
+    examples = { '1,2,3' => 6,
+                 '1,2,5,8' => 16 }
     method_test(examples, 'add')
   end
 
   def test_diff_method
     examples = { '1,0'       => 1,
                  '3,2,1'     => 0,
-                 '5,4,3,2,1' => -5 }
+                 '5,4,3,2,1' => -5,
+                 ''          => ArgumentError,
+                 '5'         => ArgumentError }
     method_test(examples, 'diff')
-
-    not_good = ['', '5']
-    not_good.each do |x|
-      calc = Calculator.new(x)
-      assert_raise ArgumentError do
-        calc.diff
-      end
-    end
   end
 
   def test_prod_method
@@ -87,15 +70,9 @@ class CalculatorTest < Test::Unit::TestCase
   def test_div_method
     examples = { '2,1'   => 2,
                  '3,2,1' => 1,
-                 '1,2,3' => 0 }
+                 '1,2,3' => 0,
+                 '2,4,0' => ArgumentError,
+                 '0,3,2' => ArgumentError }
     method_test(examples, 'div')
-
-    not_good = ['2,4,0', '0,3,2']
-    not_good.each do |x|
-      calc = Calculator.new(x)
-      assert_raise ArgumentError do
-        calc.div
-      end
-    end
   end
 end

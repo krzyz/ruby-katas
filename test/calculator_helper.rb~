@@ -1,0 +1,22 @@
+def expr_test(code)
+  0.upto(9) do |i|
+    0.upto(9) do |j|
+      expression = i.to_s + ',' + j.to_s
+      code.call(expression)
+    end
+  end
+end
+
+def method_test examples, method
+  examples.each do |expr, result|
+    calc = Calculator.new(expr)
+    if result.instance_of?(Fixnum)
+      assert_equal result, eval("calc.#{method}")
+    elsif result == ArgumentError
+      assert_raise ArgumentError do
+       eval("calc.#{method}")
+      end
+    end 
+  end
+end
+

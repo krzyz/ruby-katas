@@ -6,10 +6,10 @@ class Calculator
   end
 
   def expr=(expression)
-    if /\A\d?(,\d)*\z/ === expression
-      @digits = expression.split(',').map {|x| x.to_i}
+    if /\A\d?([\n,]\d)*\z/ === expression
+      @digits = expression.split(/[\n,]/).map {|x| x.to_i}
     else
-      raise ArgumentError, 'Expression must be a "digit/digit" string'
+      raise ArgumentError, 'Expression must be made of digits seperated by commas or newlines'
     end
   end
 
