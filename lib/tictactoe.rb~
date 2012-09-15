@@ -10,11 +10,13 @@ class Board
 
   def move(row, column, piece)
     unless (1..3) === row && (1..3) === column
-      raise ArgumentError, "Row and column must be 1, 2 or 3"
+      raise ArgumentError, "Row and column must be integers between 1 and 3."
     end
     unless ['o', 'x'].include? piece
-      raise ArgumentError, "Piece must be 'o' or 'x'"
+      raise ArgumentError, "Piece must be 'o' or 'x'."
     end
+    unless @grid[ [row, column] ] == ' '
+      raise RuntimeError, "Space must be unoccupied."
     @grid[ [row, column] ] = piece
   end
 
