@@ -18,4 +18,14 @@ class WordWrapTest < Test::Unit::TestCase
     end
   end
 
+  def test_wrap
+    assert_nothing_raised do
+      WordWrap.new(5).wrap "this is text"
+    end
+
+    assert_raise ArgumentError do
+      WordWrap.new(4).wrap([1,2,3])
+    end
+  end
+
 end
