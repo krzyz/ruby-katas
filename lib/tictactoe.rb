@@ -3,7 +3,7 @@ class Board
     @grid = Hash.new
     (1..3).each do |i|
       (1..3).each do |j|
-        @grid[ [i,j] ] = ' '
+        @grid[ [i,j] ] = ''
       end
     end
   end
@@ -15,10 +15,21 @@ class Board
     unless ['o', 'x'].include? piece
       raise ArgumentError, "Piece must be 'o' or 'x'."
     end
-    unless @grid[ [row, column] ] == ' '
+    unless @grid[ [row, column] ].empty?
       raise RuntimeError, "Space must be unoccupied."
     end
     @grid[ [row, column] ] = piece
+  end
+
+  def display
+    (1..3).each do |i|
+      (1..3).each do |j|
+        case @grid[ [i,j] ]
+        when '' then print '*'
+        end
+      end
+      print "\n"
+    end
   end
 
   def to_s
