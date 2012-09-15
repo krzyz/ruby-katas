@@ -5,9 +5,16 @@ class Calculator
     self.expr = expression
   end
 
-  def expr=(expression)
-    if /\A-?\d?([\n,]-?\d)*\z/ === expression
-      @digits = expression.split(/[\n,]/).map {|x| x.to_i}
+  def expr=(string)
+    # because string can be frozen
+    expression = string.dup
+    # if there's "//[.]\n" at the beginning, 
+    # delimiter is .
+    /\A(?<ctrl>\/\/\[(?<delimiter>.)\]\n)/ =~ expression
+    # and that beginning is deleted
+    expression.sub!(ctrl, '') if ctrl 
+    if /\A-?\d?([\n,#{delimiter}]-?\d)*\z/ =~ expression
+      @digits = expression.split(/[\n,#{delimiter}]/).map {|x| x.to_i}
     else
       raise ArgumentError, 'Expression must be made of digits seperated by commas or newlines'
     end

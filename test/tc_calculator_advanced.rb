@@ -20,4 +20,10 @@ class CalculatorAdvancedTest < Test::Unit::TestCase
       calc = Calculator.new("-1,4\n-5")
     end
   end
+
+  def test_delimiter
+    examples = { "//[;]\n1;2" => 3,
+                 "1;2" => ArgumentError }
+    method_test(examples, 'add')
+  end
 end
