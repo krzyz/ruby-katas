@@ -21,6 +21,17 @@ class Board
     @grid[ [row, column] ] = piece
   end
 
+  def display
+    (1..3).each do |i|
+      (1..3).each do |j|
+        case @grid[ [i,j] ]
+        when '' then print '*'
+        end
+      end
+      print "\n"
+    end
+  end
+
   def to_s
     puts @grid
   end
