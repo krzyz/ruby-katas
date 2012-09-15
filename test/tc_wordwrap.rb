@@ -45,4 +45,8 @@ class WordWrapTest < Test::Unit::TestCase
   def test_long_words_wrap
     assert_equal "word\nword", WordWrap.new(4).wrap("wordword")
   end
+
+  def test_long_and_space
+    assert_equal "wor\nd\nwor\nd\nwor\nd", WordWrap.new(3).wrap("word word word")
+  end
 end

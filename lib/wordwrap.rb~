@@ -6,7 +6,9 @@ class WordWrap
 
   def wrap(string)
     raise ArgumentError unless string.instance_of?(String)
-    if string.length < @wrap_column
+    p string
+    p string[0...@wrap_column].rindex(" ")
+    if string.length <= @wrap_column
       return string
     elsif (string.index(" ") || string.length) >= string.length
       return string[0...@wrap_column] + "\n" + self.wrap(string[@wrap_column..-1])
