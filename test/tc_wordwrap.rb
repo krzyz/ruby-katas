@@ -32,4 +32,8 @@ class WordWrapTest < Test::Unit::TestCase
     assert_equal "", WordWrap.new(4).wrap("")
   end
 
+  def test_short_wrap
+    assert_equal "word", WordWrap.new(6).wrap("word")
+  end
+
 end

@@ -8,5 +8,6 @@ class WordWrap
     raise ArgumentError unless string.instance_of?(String)
     if string == ""
       return ""
+    end
   end
 end

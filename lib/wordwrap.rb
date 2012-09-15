@@ -9,5 +9,8 @@ class WordWrap
     if string == ""
       return ""
     end
+    if string.length <= @wrap_column
+      return string
+    end
   end
 end
