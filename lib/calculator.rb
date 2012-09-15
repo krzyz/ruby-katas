@@ -8,13 +8,17 @@ class Calculator
   def expr=(string)
     # because string can be frozen
     expression = string.dup
-    # if there's "//[.]\n" at the beginning, 
-    # delimiter is .
-    /\A(?<ctrl>\/\/\[(?<delimiter>.)\]\n)/ =~ expression
-    # and that beginning is deleted
-    expression.sub!(ctrl, '') if ctrl 
-    if /\A-?\d?([\n,#{delimiter}]-?\d)*\z/ =~ expression
-      @digits = expression.split(/[\n,#{delimiter}]/).map {|x| x.to_i}
+    delimiters = ''
+    while /\A\/\/(\[(?<delimiter>.)\])+\n/ =~ expression do
+      delimiters += delimiter
+      if /[\*\(\)\[\]\$\{\}\.\/\?\+]/ === delimiter
+        delimiter.prepend("\\")
+      end
+      expression.sub!(/\[#{delimiter}\]/, '')
+    end
+    expression.sub!("//\n", '')
+    if /\A-?\d?([\n,#{delimiters}]-?\d)*\z/ =~ expression
+      @digits = expression.split(/[\n,#{delimiters}]/).map {|x| x.to_i}
     else
       raise ArgumentError, 'Expression must be made of digits seperated by commas or newlines'
     end

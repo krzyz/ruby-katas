@@ -41,4 +41,11 @@ class CalculatorAdvancedTest < Test::Unit::TestCase
     examples = { "//[;]\n3;2" => 1 }
     method_test(examples, 'div')
   end
+
+  def test_multiple_delimiters
+    examples = { "//[*][;]\n1*2;3"           => 6, 
+                 "//[*][;][#]\n5*4;3#2"      => 14,
+                 "//[#][;][*]\n1*2#3;4,5\n6" => 21 }
+    method_test(examples, 'add')
+  end
 end
