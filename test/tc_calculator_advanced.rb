@@ -36,4 +36,9 @@ class CalculatorAdvancedTest < Test::Unit::TestCase
     examples = { "//[;]\n2;1" => 2 }
     method_test(examples, 'prod')
   end
+
+  def test_method_div
+    examples = { "//[;]\n3;2" => 1 }
+    method_test(examples, 'div')
+  end
 end
