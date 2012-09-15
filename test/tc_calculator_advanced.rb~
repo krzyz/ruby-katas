@@ -56,7 +56,12 @@ class CalculatorAdvancedTest < Test::Unit::TestCase
 
   def test_multiple_delimiters_prod
     examples = { "//[*][;]\n1*2;3" => 6 }
-    method_test(examples, 'diff')
+    method_test(examples, 'prod')
+  end
+
+  def test_multiple_delimiters_prod
+    examples = { "//[*][;]\n1*2;3" => 0 }
+    method_test(examples, 'prod')
   end
 
 end
