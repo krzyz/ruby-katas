@@ -3,7 +3,7 @@ class Board
     @grid = Hash.new
     (1..3).each do |i|
       (1..3).each do |j|
-        @grid[ [i,j] ] = 0
+        @grid[ [i,j] ] = ''
       end
     end
   end
