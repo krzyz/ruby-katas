@@ -6,6 +6,8 @@ class WordWrap
 
   def wrap(string)
     raise ArgumentError unless string.instance_of?(String)
-    @string = string
+    if string == ""
+      return ""
+    end
   end
 end

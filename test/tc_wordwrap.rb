@@ -28,4 +28,8 @@ class WordWrapTest < Test::Unit::TestCase
     end
   end
 
+  def test_empty_wrap
+    assert_equal "", WordWrap.new(4).wrap("")
+  end
+
 end
