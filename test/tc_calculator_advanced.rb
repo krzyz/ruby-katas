@@ -26,4 +26,9 @@ class CalculatorAdvancedTest < Test::Unit::TestCase
                  "1;2" => ArgumentError }
     method_test(examples, 'add')
   end
+
+  def test_delimiter_diff
+    examples = { "\\[;]\n2;1" => 1 }
+    method_test(examples, 'diff')
+  end
 end
