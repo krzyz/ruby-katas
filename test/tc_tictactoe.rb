@@ -9,4 +9,9 @@ class TicTacToeTest < Test::Unit::TestCase
     @board.move(1, 1, 'x')
     assert_equal 'x', @board.piece_at(1, 1)
   end
+  def test_invalid_move
+    assert_raise ArgumentError do
+      @board.move(4, 4, 'x')
+    end
+  end
 end
