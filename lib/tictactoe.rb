@@ -34,6 +34,11 @@ class Board
     end
   end
 
+  def piece_at(x, y)
+    @grid[ [x, y] ]
+  end
+
+
   def to_s
     puts @grid
   end
