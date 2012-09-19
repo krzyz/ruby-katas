@@ -26,6 +26,8 @@ class Board
       (1..3).each do |j|
         case @grid[ [i,j] ]
         when '' then print '*'
+        when 'o' then print 'o'
+        when 'x' then print 'x'
         end
       end
       print "\n"

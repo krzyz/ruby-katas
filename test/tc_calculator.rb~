@@ -2,11 +2,6 @@ require 'lib/calculator'
 require 'test/calculator_helper'
 require 'test/unit'
 
-# Maybe writing tests longer than simple classes
-# is not the best way to go, but as I'm learing
-# I think it is justified.
-
-
 class CalculatorTest < Test::Unit::TestCase
   
   def test_initialize_ok
