@@ -12,6 +12,7 @@ class TicTacToeTest < Test::Unit::TestCase
   def test_invalid_move
     assert_raise ArgumentError do
       @board.move(4, 4, 'x')
+      @board.move(1, 1, 'z')
     end
   end
 end
